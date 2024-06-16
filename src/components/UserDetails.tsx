@@ -4,9 +4,27 @@ import { FollowerPointerCard } from "./ui/following-pointer";
 import { useState, useEffect } from "react";
 import DetailSkeleton from "./Skeleton/DetailSkeleton";
 
-// Define your main component
-const UserCardList = ({ selectedUser }) => {
-  const [defaultUser, setDefaultUser] = useState(null);
+interface UserProfile {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+}
+
+interface User {
+  id: string;
+  avatar: string;
+  profile: UserProfile;
+  jobTitle: string;
+  Bio: string;
+}
+
+interface UserCardListProps {
+  selectedUser?: User | null;
+}
+
+const UserCardList: React.FC<UserCardListProps> = ({ selectedUser }) => {
+  const [defaultUser, setDefaultUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,13 +50,13 @@ const UserCardList = ({ selectedUser }) => {
 
   const userToDisplay = selectedUser || defaultUser;
 
-  const UserCard = ({ user }) => {
+  const UserCard: React.FC<{ user: User }> = ({ user }) => {
     const [copied, setCopied] = useState(false);
 
     const handleCopyEmail = () => {
       navigator.clipboard.writeText(user.profile.email).then(() => {
         setCopied(true);
-        setTimeout(() => setCopied(false), 2000); // Reset the copied state after 2 seconds
+        setTimeout(() => setCopied(false), 2000);
       });
     };
 
@@ -91,15 +109,13 @@ const UserCardList = ({ selectedUser }) => {
     );
   };
 
-  return (
-    <div>
-      <UserCard user={userToDisplay} />
-    </div>
-  );
+  return <div>{userToDisplay && <UserCard user={userToDisplay} />}</div>;
 };
 
-// TitleComponent used within UserCard
-const TitleComponent = ({ title, avatar }) => (
+const TitleComponent: React.FC<{ title: string; avatar: string }> = ({
+  title,
+  avatar,
+}) => (
   <div className="flex space-x-2 items-center">
     <Image
       src={avatar}

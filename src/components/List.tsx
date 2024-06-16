@@ -4,13 +4,31 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Skeleton/Card";
 
-const List = ({ setSelectedUser }) => {
-  const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
+// Define the types for user and profile
+interface UserProfile {
+  firstName: string;
+  lastName: string;
+  username: string;
+}
+
+interface User {
+  id: string;
+  avatar: string;
+  profile: UserProfile;
+}
+
+// Define the type for the component props
+interface ListProps {
+  setSelectedUser: (user: User) => void;
+}
+
+const List: React.FC<ListProps> = ({ setSelectedUser }) => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Total number of users and limit per page
   const limitPerPage = 6;
@@ -26,8 +44,8 @@ const List = ({ setSelectedUser }) => {
       setUsers(data);
       setTotalUsers(data.length);
       setLoading(false);
-    } catch (error) {
-      setError(error);
+    } catch (error: any) {
+      setError(error.message);
       setLoading(false);
     }
   };
