@@ -5,7 +5,7 @@ const Card = () => {
   return (
     <div>
       <div className="bg-blue-950 rounded-lg hover:cursor-not-allowed flex items-center px-5 w-full py-3 gap-10">
-        <div className="rounded-full overflow-hidden w-16 h-16">
+        <div className="rounded-full overflow-hidden w-14 h-14">
           <Skeleton className="w-full h-full bg-slate-600" />
         </div>
         <div className="flex flex-col">

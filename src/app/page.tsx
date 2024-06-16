@@ -23,7 +23,7 @@ const Home: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   return (
-    <main className="w-screen bg-slate-950 h-screen grid grid-cols-12">
+    <main className="w-screen-[98vw] h- bg-slate-950 h-screen grid grid-cols-12">
       <section className="col-span-3 p-10 px-5 w-full">
         <List setSelectedUser={setSelectedUser} />
       </section>

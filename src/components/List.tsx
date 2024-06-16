@@ -111,11 +111,11 @@ const List: React.FC<ListProps> = ({ setSelectedUser }) => {
       {paginatedUsers.map((user, index) => (
         <div
           key={index}
-          className="bg-blue-950 rounded-lg flex items-center px-5 w-full py-3 gap-10 cursor-pointer transition duration-500 ease-in-out transform hover:bg-blue-900 hover:scale-105"
+          className="bg-blue-950 rounded-lg flex items-center px-5 w-full py-2 gap-10 cursor-pointer transition duration-500 ease-in-out transform hover:bg-blue-900 hover:scale-105"
           onClick={() => setSelectedUser(user)}
         >
           <div className="rounded-full overflow-hidden w-16 h-16">
-            <Image src={user.avatar} alt="Avatar" width={70} height={70} />
+            <Image src={user.avatar} alt="Avatar" width={65} height={65} />
           </div>
           <div className="flex flex-col">
             <h1 className="text-white text-lg font-semibold">
@@ -125,7 +125,7 @@ const List: React.FC<ListProps> = ({ setSelectedUser }) => {
           </div>
         </div>
       ))}
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between mt-2">
         <button
           onClick={handlePrevPage}
           disabled={page === 1}
