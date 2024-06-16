@@ -4,6 +4,7 @@ import { FollowerPointerCard } from "./ui/following-pointer";
 import { useState, useEffect } from "react";
 import DetailSkeleton from "./Skeleton/DetailSkeleton";
 
+// Define the types for user and profile
 interface UserProfile {
   firstName: string;
   lastName: string;
@@ -56,7 +57,7 @@ const UserCardList: React.FC<UserCardListProps> = ({ selectedUser }) => {
     const handleCopyEmail = () => {
       navigator.clipboard.writeText(user.profile.email).then(() => {
         setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+        setTimeout(() => setCopied(false), 2000); // Reset the copied state after 2 seconds
       });
     };
 

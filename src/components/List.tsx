@@ -4,22 +4,25 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Skeleton/Card";
 
+// Define the props type for List component
+interface ListProps {
+  setSelectedUser: (user: User) => void;
+}
+
 // Define the types for user and profile
 interface UserProfile {
   firstName: string;
   lastName: string;
   username: string;
+  email: string;
 }
 
 interface User {
   id: string;
   avatar: string;
   profile: UserProfile;
-}
-
-// Define the type for the component props
-interface ListProps {
-  setSelectedUser: (user: User) => void;
+  jobTitle: string;
+  Bio: string;
 }
 
 const List: React.FC<ListProps> = ({ setSelectedUser }) => {
@@ -28,11 +31,9 @@ const List: React.FC<ListProps> = ({ setSelectedUser }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
-  // Total number of users and limit per page
   const limitPerPage = 6;
-  const [totalUsers, setTotalUsers] = useState(0);
 
   const getUsers = async () => {
     try {
@@ -42,10 +43,9 @@ const List: React.FC<ListProps> = ({ setSelectedUser }) => {
       );
       const data = res.data;
       setUsers(data);
-      setTotalUsers(data.length);
       setLoading(false);
     } catch (error: any) {
-      setError(error.message);
+      setError(error);
       setLoading(false);
     }
   };
